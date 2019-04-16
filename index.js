@@ -79,15 +79,7 @@ class TextField extends React.PureComponent {
       <FieldSet
         name={this.props.name}
         id={this.props.name}
-        border={
-          !this.props.border
-            ? {
-                border: '1px solid #909090',
-              }
-            : {
-                border: props.border,
-              }
-        }
+        border={!this.props.border ? '1px solid #909090' : props.border}
         style={{
           width: '180px',
           margin: '0',
