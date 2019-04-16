@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 /**
  *
- * BassText
+ * TextField
  *
  */
 // NOTE
@@ -10,18 +10,6 @@
 // Use onBlur={this.switchToText} to switch it back to a text field with placeholder text if the user leaves the field without entering a date.
 
 // NOTE Example:
-// switchToDate = e => {
-//   const x = document.getElementById(e.target.id);
-//   x.type = 'date';
-// };
-
-// switchToText = e => {
-//   const { id, value } = e.target;
-//   const x = document.getElementById(id);
-//   if (value === '') {
-//     x.type = 'text';
-//   }
-// };
 
 // <TextField
 // placeholder="Start Date"
@@ -42,14 +30,6 @@ const RebassTextfield = styled(Card)`
   height: 56px;
   padding: 15px;
   transition: border-color 0.1s linear;
-`;
-
-const FieldSet = styled.fieldset`
-  outline: none;
-  border-radius: 4px;
-  font-family: inherit;
-
-  transition: border-color 0.1s linear;
 
   :hover {
     border: solid 1px black;
@@ -58,13 +38,7 @@ const FieldSet = styled.fieldset`
       opacity: 1;
     }
   }
-  /* :focus {
-    border: 1.5px solid #3a71ff;
-    ::placeholder {
-      opacity: 0;
-    }
-  } */
-  :focus-within {
+  :focus {
     border: 1.5px solid #3a71ff;
     ::placeholder {
       opacity: 0;
@@ -73,41 +47,78 @@ const FieldSet = styled.fieldset`
 `;
 
 class TextField extends React.PureComponent {
+  state = {
+    opacity: '0',
+    type: '',
+  };
+
+  componentDidMount() {
+    if (this.props.value) {
+      this.setState({ opacity: '1' });
+    }
+  }
+
+  switchToDate = e => {
+    const { id, value } = e.target;
+    const x = document.getElementById(id);
+    if (this.props.type === 'date' && value === '') {
+      x.type = 'date';
+      this.setState({ opacity: '1' });
+    }
+    this.setState({ opacity: '1' });
+  };
+
+  switchToText = e => {
+    const { id, value } = e.target;
+    const x = document.getElementById(id);
+    if (this.props.type === 'date' && value === '') {
+      x.type = 'text';
+      this.setState({ opacity: '0' });
+    }
+    if (value === '') {
+      this.setState({ opacity: '0' });
+    }
+  };
+
   render() {
     const { ...props } = this.props;
     return (
-      <FieldSet
-        name={this.props.name}
-        id={this.props.name}
-        border={!this.props.border ? '1px solid #909090' : props.border}
+      <div
         style={{
-          width: '180px',
-          margin: '0',
-          borderRadius: '4px',
-          padding: '0',
+          display: 'flex',
+          flexDirection: 'column',
+          width: 'fit-content',
         }}
       >
         <legend
           style={{
             fontSize: '12px',
-            marginBottom: '-9px',
-            padding: '0',
-            borderRadius: '4px',
-            marginLeft: '6px',
+            opacity: `${this.state.opacity}`,
+            transition: 'opacity .25s ease-in-out',
           }}
         >
-          Date
+          {props.label}
         </legend>
         <RebassTextfield
           {...props}
+          type={
+            this.props.type === 'date' && this.props.value === ''
+              ? this.state.type
+              : this.props.type
+          }
           as="input"
+          name={this.props.name}
+          id={this.props.name}
           width="180px"
           fontSize={2}
           rows={4}
+          border={!this.props.border ? '1px solid #909090' : props.border}
+          onFocus={this.switchToDate}
+          onBlur={this.switchToText}
         >
           {props.children}
         </RebassTextfield>
-      </FieldSet>
+      </div>
     );
   }
 }
