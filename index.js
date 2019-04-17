@@ -53,7 +53,7 @@ class TextField extends React.PureComponent {
   };
 
   componentDidMount() {
-    if (this.props.value === '') {
+    if (this.props.value === '' || this.props.value === null) {
       this.setState({ opacity: '0' });
     }
   }
@@ -116,8 +116,8 @@ class TextField extends React.PureComponent {
           fontSize={2}
           rows={4}
           border={!this.props.border ? '1px solid #909090' : props.border}
-          onBlur={this.switchToText}
           onFocus={this.switchToDate}
+          onBlur={this.switchToText}
         >
           {props.children}
         </RebassTextfield>
