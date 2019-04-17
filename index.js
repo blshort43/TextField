@@ -48,22 +48,22 @@ const RebassTextfield = styled(Card)`
 
 class TextField extends React.PureComponent {
   state = {
-    opacity: '0',
-    type: '',
+    opacity: '1',
+    type: 'text',
   };
 
   componentDidMount() {
-    if (this.props.value) {
-      this.setState({ opacity: '1' });
+    if (this.props.value === '') {
+      this.setState({ opacity: '0' });
     }
   }
 
   switchToDate = e => {
-    const { id, value } = e.target;
+    const { id } = e.target;
     const x = document.getElementById(id);
-    if (this.props.type === 'date' && value === '') {
+    if (this.props.type === 'date') {
       x.type = 'date';
-      this.setState({ opacity: '1' });
+      this.setState({ opacity: '1', type: 'date' });
     }
     this.setState({ opacity: '1' });
   };
@@ -74,6 +74,7 @@ class TextField extends React.PureComponent {
     if (this.props.type === 'date' && value === '') {
       x.type = 'text';
       this.setState({ opacity: '0' });
+      document.activeElement.blur();
     }
     if (value === '') {
       this.setState({ opacity: '0' });
@@ -95,6 +96,7 @@ class TextField extends React.PureComponent {
             fontSize: '12px',
             opacity: `${this.state.opacity}`,
             transition: 'opacity .25s ease-in-out',
+            marginTop: '-18px',
           }}
         >
           {props.label}
@@ -107,14 +109,15 @@ class TextField extends React.PureComponent {
               : this.props.type
           }
           as="input"
+          maxLength="0"
           name={this.props.name}
           id={this.props.name}
           width="180px"
           fontSize={2}
           rows={4}
           border={!this.props.border ? '1px solid #909090' : props.border}
-          onFocus={this.switchToDate}
           onBlur={this.switchToText}
+          onFocus={this.switchToDate}
         >
           {props.children}
         </RebassTextfield>
@@ -123,6 +126,6 @@ class TextField extends React.PureComponent {
   }
 }
 
-TextField.propTypes = { children: PropTypes.node.isRequired };
+TextField.propTypes = { name: PropTypes.node.isRequired };
 
 export default TextField;
