@@ -39,7 +39,7 @@ const RebassTextfield = styled(Card)`
     }
   }
   :focus {
-    border: 1.5px solid #3a71ff;
+    border: 1.5px solid #2e66ff;
     ::placeholder {
       opacity: 0;
     }
@@ -85,15 +85,15 @@ class TextField extends React.PureComponent {
     const { ...props } = this.props;
     return (
       <Box
-        margin={this.props.margin}
-        marginTop={this.props.marginTop}
-        marginLeft={this.props.marginLeft}
-        marginRight={this.props.marginRight}
         style={{
           display: 'flex',
           flexDirection: 'column',
           width: 'fit-content',
         }}
+        margin={this.props.margin}
+        marginTop={this.props.marginTop}
+        marginLeft={this.props.marginLeft}
+        marginRight={this.props.marginRight}
       >
         <legend
           style={{
