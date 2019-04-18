@@ -5,14 +5,14 @@
  *
  */
 // NOTE
-// To create a date selector with an initial placeholder text message, use as="input" type="text" which will initially create a text field.
+// To create a date selector with an initial placeHolder text message, use as="input" type="text" which will initially create a text field.
 // Then use onFocus={this.switchToDate} to switch the field to a date selector field when the user clicks on it.
-// Use onBlur={this.switchToText} to switch it back to a text field with placeholder text if the user leaves the field without entering a date.
+// Use onBlur={this.switchToText} to switch it back to a text field with placeHolder text if the user leaves the field without entering a date.
 
 // NOTE Example:
 
 // <TextField
-// placeholder="Start Date"
+// placeHolder="Start Date"
 // type="date"
 // onFocus={this.switchToDate}
 // onBlur={this.switchToText}
@@ -21,7 +21,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Card } from 'rebass';
+import { Card, Box } from 'rebass';
 
 const RebassTextfield = styled(Card)`
   outline: none;
@@ -84,7 +84,11 @@ class TextField extends React.PureComponent {
   render() {
     const { ...props } = this.props;
     return (
-      <div
+      <Box
+        margin={this.props.margin}
+        marginTop={this.props.marginTop}
+        marginLeft={this.props.marginLeft}
+        marginRight={this.props.marginRight}
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -109,10 +113,13 @@ class TextField extends React.PureComponent {
               : this.props.type
           }
           as="input"
-          maxLength="0"
+          margin="0"
+          marginTop="0"
+          marginLeft="0"
+          marginRight="0"
           name={this.props.name}
           id={this.props.name}
-          width="180px"
+          width={props.width ? props.width : '180px'}
           fontSize={2}
           rows={4}
           border={!this.props.border ? '1px solid #909090' : props.border}
@@ -121,7 +128,7 @@ class TextField extends React.PureComponent {
         >
           {props.children}
         </RebassTextfield>
-      </div>
+      </Box>
     );
   }
 }
