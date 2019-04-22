@@ -4,19 +4,6 @@
  * TextField
  *
  */
-// NOTE
-// To create a date selector with an initial placeHolder text message, use as="input" type="text" which will initially create a text field.
-// Then use onFocus={this.switchToDate} to switch the field to a date selector field when the user clicks on it.
-// Use onBlur={this.switchToText} to switch it back to a text field with placeHolder text if the user leaves the field without entering a date.
-
-// NOTE Example:
-
-// <TextField
-// placeHolder="Start Date"
-// type="date"
-// onFocus={this.switchToDate}
-// onBlur={this.switchToText}
-// />
 
 import React from 'react';
 import PropTypes from 'prop-types';
