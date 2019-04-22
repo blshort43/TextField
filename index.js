@@ -72,11 +72,6 @@ class TextField extends React.PureComponent {
     const { ...props } = this.props;
     return (
       <Box
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          width: 'fit-content',
-        }}
         margin={props.margin}
         marginTop={props.marginTop}
         marginLeft={props.marginLeft}
@@ -107,7 +102,7 @@ class TextField extends React.PureComponent {
           rows={4}
           border={!props.border ? '1px solid #909090' : props.border}
           onFocus={this.switchToDate}
-          onBlur={this.switchToText}a
+          onBlur={this.switchToText}
         >
           {props.children}
         </RebassTextfield>
