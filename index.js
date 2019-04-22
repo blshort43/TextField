@@ -77,10 +77,10 @@ class TextField extends React.PureComponent {
           flexDirection: 'column',
           width: 'fit-content',
         }}
-        margin={this.props.margin}
-        marginTop={this.props.marginTop}
-        marginLeft={this.props.marginLeft}
-        marginRight={this.props.marginRight}
+        margin={props.margin}
+        marginTop={props.marginTop}
+        marginLeft={props.marginLeft}
+        marginRight={props.marginRight}
       >
         <legend
           style={{
@@ -95,23 +95,22 @@ class TextField extends React.PureComponent {
         <RebassTextfield
           {...props}
           type={
-            this.props.type === 'date' && this.props.value === ''
+            props.type === 'date' && props.value === ''
               ? this.state.type
               : this.props.type
           }
           as="input"
-          margin="0"
           marginTop="0"
           marginLeft="0"
           marginRight="0"
-          name={this.props.name}
-          id={this.props.name}
+          name={props.name}
+          id={props.name}
           width={props.width ? props.width : '180px'}
           fontSize={2}
           rows={4}
-          border={!this.props.border ? '1px solid #909090' : props.border}
+          border={!props.border ? '1px solid #909090' : props.border}
           onFocus={this.switchToDate}
-          onBlur={this.switchToText}
+          onBlur={this.switchToText}a
         >
           {props.children}
         </RebassTextfield>
