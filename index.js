@@ -100,9 +100,6 @@ class TextField extends React.PureComponent {
               : this.props.type
           }
           as="input"
-          marginTop="0"
-          marginLeft="0"
-          marginRight="0"
           name={props.name}
           id={props.name}
           width={props.width ? props.width : '180px'}
