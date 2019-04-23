@@ -71,12 +71,7 @@ class TextField extends React.PureComponent {
   render() {
     const { ...props } = this.props;
     return (
-      <Box
-        margin={props.margin}
-        marginTop={props.marginTop}
-        marginLeft={props.marginLeft}
-        marginRight={props.marginRight}
-      >
+      <Box {...props}>
         <legend
           style={{
             fontSize: '12px',
@@ -88,24 +83,22 @@ class TextField extends React.PureComponent {
           {props.label}
         </legend>
         <RebassTextfield
-          {...props}
           type={
             props.type === 'date' && props.value === ''
               ? this.state.type
               : this.props.type
           }
           as="input"
+          placeholder={props.placeholder}
           name={props.name}
           id={props.name}
+          value={props.value}
           width={props.width ? props.width : '180px'}
           fontSize={2}
-          rows={4}
           border={!props.border ? '1px solid #909090' : props.border}
           onFocus={this.switchToDate}
           onBlur={this.switchToText}
-        >
-          {props.children}
-        </RebassTextfield>
+        />
       </Box>
     );
   }
