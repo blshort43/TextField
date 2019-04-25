@@ -4,6 +4,22 @@
  * TextField
  *
  */
+// NOTE
+// To create a date selector with an initial placeHolder text message, use as="input" type="text" which will initially create a text field.
+// Then use onFocus={this.switchToDate} to switch the field to a date selector field when the user clicks on it.
+// Use onBlur={this.switchToText} to switch it back to a text field with placeHolder text if the user leaves the field without entering a date.
+
+// NOTE Set marginTop/mt on the child component instead of in the Styled Component to keep the top margin from being placed between the label and the TextField.
+
+// NOTE Example:
+
+// <TextField
+// marginTop='20px'
+// placeHolder="Start Date"
+// type="date"
+// onFocus={this.switchToDate}
+// onBlur={this.switchToText}
+// />
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -71,7 +87,7 @@ class TextField extends React.PureComponent {
   render() {
     const { ...props } = this.props;
     return (
-      <Box>
+      <Box margin={props.margin} marginTop={props.marginTop}>
         <legend
           style={{
             fontSize: '12px',
@@ -89,6 +105,8 @@ class TextField extends React.PureComponent {
               ? this.state.type
               : this.props.type
           }
+          margin="0"
+          marginTop="0"
           as="input"
           id={props.name}
           width={props.width ? props.width : '180px'}
